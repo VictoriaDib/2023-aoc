@@ -3,6 +3,16 @@ import re
 def score(x):
     return 1 << (x-1)
 
+def distribute(id, common, copies):
+    for i in range(id+1, (id+common)+1):
+            print(copies)
+            if i in copies:
+                print("copiy:",copies[i])
+                copies[i] += 1
+            else:
+                copies[i] = 1
+            print("Card",id ," won copies of cards:",i)
+
 
 with open("small.txt","r") as f:
     copies = dict()
@@ -34,9 +44,13 @@ with open("small.txt","r") as f:
                 copies[i] = 1
             print("Card",id ," won copies of cards:",i)
 
-        for k,v in copies.items():
-            for i in range(v,1,-1):
-                print("stepping:", i)
+    print("COPIES:", copies)
+    for k,v in copies.items():
+        # print(k," distributing copies")
+        for i in range(v+1,1,-1):
+            if k < len(copies): 
+                copies[k+1] += 1
+            # print("stepping:", i)
     print("Part 2:", copies)
 
     # print(">>", 8>>)
